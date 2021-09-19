@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "sites",
     "rest_framework",
     "fileServer",
+    "users",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -53,6 +54,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+REST_FRAMEWORK = {"DEFAULT_AUTHENTICATION_CLASSES": ("users.backends.JWTAuth",)}
 
 ROOT_URLCONF = "museum.urls"
 
@@ -73,7 +76,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "museum.wsgi.application"
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -123,3 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+JWT_SECRET_KEY = os.environ.get("JWT_SECRET_KEY")
+
+AUTH_USER_MODEL = "users.User"
