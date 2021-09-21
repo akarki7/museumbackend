@@ -17,7 +17,7 @@ class Site(models.Model):
     serial_number = models.CharField(max_length=10, null=False)
     title = models.CharField(max_length=50, null=False)
     file_name = models.CharField(max_length=50, null=True, blank=True)
-    preview = models.FileField()
+    preview = models.FileField(blank=True, null=True)
     # type: file, max-size: 20MB (excludign VR and AR)
     file_type= models.CharField(max_length=5, null=False, blank=True)
     original_scan = models.CharField(max_length=5, null=False, blank=True)

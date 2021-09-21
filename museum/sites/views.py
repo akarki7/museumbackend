@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
@@ -22,12 +23,13 @@ class SitesAdminViewSet(
     UpdateModelMixin,
     GenericViewSet,
 ):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser, IsAuthenticated]
     serializer_class = SiteSerializer
     queryset = Site.objects.all()
 
 
 class SitesFrontendViewSet(ListModelMixin, RetrieveModelMixin, GenericViewSet):
+    # authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
     serializer_class = SiteSerializer
     queryset = Site.objects.all()

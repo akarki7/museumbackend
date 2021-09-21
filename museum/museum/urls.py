@@ -22,9 +22,11 @@ from sites import urls as museum_urls
 from django.views.static import serve
 from django.conf import settings
 from fileServer.views import authenticate_and_serve
+from users import urls as auth_urls
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", include(museum_urls)),
+    path("auth/", include(auth_urls)),
     url(r"^media/(?P<path>.*)$", authenticate_and_serve),
 ]
