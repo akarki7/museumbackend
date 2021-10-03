@@ -1,0 +1,9 @@
+.venv
+.vscode
+db.sqlite3
+__pycache__/
+assets/
+.env
+*.docx
+serverless.yml
+terraform/
