@@ -1,7 +1,6 @@
 from django.urls import path
 from django.urls.conf import include
 from django.conf.urls import url
-from django.contrib import admin
 from sites import urls as museum_urls
 from users import urls as auth_urls
 from fileServers.views import authenticate_and_serve
@@ -10,8 +9,10 @@ from drf_spectacular.views import (
     SpectacularSwaggerView,
 )
 from watchman.views import status
+import os
 
 urlpatterns = [
+    # DEV_EASE_UP: TO BE DELETED
     path("api/health", status, name="health-view"),
     path("api/v1/schema", SpectacularAPIView.as_view(), name="schema"),
     path(
@@ -23,3 +24,7 @@ urlpatterns = [
     path("auth/", include(auth_urls)),
     url(r"^media/(?P<path>.*)$", authenticate_and_serve),
 ]
+
+if os.getenv("LOCAL_DEVELOPMENT", None) is not None:
+    from django.contrib import admin
+    urlpatterns.append(path("admin", admin.site.urls))
