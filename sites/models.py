@@ -1,7 +1,8 @@
 from inspect import signature
 from django.db import models
 from datetime import date
-
+from django.dispatch import receiver
+import os
 # Create your models here.
 
 class Site(models.Model):
@@ -14,7 +15,7 @@ class Site(models.Model):
         ("JU", "IUB-JU")
     ]
 
-    serial_number = models.CharField(max_length=10, null=False)
+    serial_number = models.CharField(max_length=10, null=False, primary_key=True)
     title = models.CharField(max_length=50, null=False)
     file_name = models.CharField(max_length=50, null=True, blank=True)
     preview = models.FileField(blank=True, null=True)
@@ -36,3 +37,21 @@ class Site(models.Model):
     found_date = models.DateField(null=False, blank=False, default=date(1970, 1, 1))
     production_date = models.DateField(null=False, blank=False, default=date(1970, 1, 1))
     additional_info = models.CharField(max_length=500, null=True, blank=True)
+
+class Videos(models.Model):
+
+    def file_upload_location(self, filename):
+        return f"{self.related_site.serial_number}/videos/{filename}"
+
+    related_site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name="videos")
+    name = models.CharField(max_length=50, null=True)
+    video = models.FileField(upload_to=file_upload_location)
+
+class Photos(models.Model):
+
+    def file_upload_location(self, filename):
+        return f"{self.related_site.serial_number}/photos/{filename}"
+
+    name = models.CharField(max_length=50, null=True)
+    related_site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name="photos")
+    photo = models.FileField(upload_to=file_upload_location)

@@ -1,8 +1,10 @@
+from rest_framework.routers import SimpleRouter
+from .views import PhotosViewSet, SitesViewSet, VideoViewSet
 from django.urls import path
-from rest_framework.routers import DefaultRouter
-from .views import SitesAdminViewSet, SitesFrontendViewSet
 
-router = DefaultRouter()
-router.register(r"admin", SitesAdminViewSet , basename="admin")
-router.register(r"sites", SitesFrontendViewSet, basename="sites")
+router = SimpleRouter()
+router.register(r"sites", SitesViewSet , basename="sites")
+router.register(r"photos", PhotosViewSet, basename="photos")
+router.register(r"videos",VideoViewSet, basename="videos")
+
 urlpatterns = router.urls

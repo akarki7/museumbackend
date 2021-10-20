@@ -27,6 +27,7 @@ django-watchman = "^1.2.0"
 drf-spectacular = "^0.17.3"
 django-filter = "^2.4.0"
 djangorestframework-simplejwt = "^4.8.0"
+django-cors-headers = "^3.10.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "6.2.4"

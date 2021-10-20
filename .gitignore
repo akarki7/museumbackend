@@ -7,3 +7,4 @@ assets/
 *.docx
 serverless.yml
 terraform/
+static/
