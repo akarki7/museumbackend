@@ -1,8 +1,8 @@
-from inspect import signature
 from django.db import models
 from datetime import date
-from django.dispatch import receiver
+from django.db.models.signals import post_delete
 import os
+from django.conf import settings
 # Create your models here.
 
 class Site(models.Model):
@@ -55,3 +55,14 @@ class Photos(models.Model):
     name = models.CharField(max_length=50, null=True)
     related_site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name="photos")
     photo = models.FileField(upload_to=file_upload_location)
+
+def photo_cleanup(sender, instance, **kwargs):
+    file_location = instance.photo.name
+    os.remove(os.path.join(settings.MEDIA_ROOT, file_location))
+
+def video_cleanup(sender, instance, **kwargs):
+    file_location = instance.video.name
+    os.remove(os.path.join(settings.MEDIA_ROOT, file_location))
+
+post_delete.connect(photo_cleanup, sender=Photos)
+post_delete.connect(video_cleanup, sender=Videos)

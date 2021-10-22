@@ -39,7 +39,7 @@ class SitesViewSet(
             name = request.data.get("name", None)
             photo_obj = Photos(photo=file, name=name, related_site=self.get_object())
             photo_obj.save()
-            return Response("data received??", status=status.HTTP_201_CREATED)
+            return Response({"detail": "Photo attached"}, status=status.HTTP_201_CREATED)
         else:
             photo_id = request.data.get("photo_id", None)
             if photo_id is None:
@@ -48,8 +48,8 @@ class SitesViewSet(
                 photo_obj = Photos.objects.get(id=photo_id)
                 photo_obj.delete()
             except Photos.DoesNotExist:
-                return Response(f"Photo with {photo_id} does not exist", status=status.HTTP_400_BAD_REQUEST)
-            return Response("Photo deleted", status=status.HTTP_204_NO_CONTENT)
+                return Response(f"Photo with id {photo_id} does not exist", status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Photo deleted"}, status=status.HTTP_204_NO_CONTENT)
 
     @action(methods=["POST", "DELETE"], parser_classes=[MultiPartParser], detail=True, url_path="videos")
     def handle_videos(self, request, pk):
@@ -60,18 +60,17 @@ class SitesViewSet(
             name = request.data.get("name", None)
             video_obj = Videos(video=file, name=name, related_site=self.get_object())
             video_obj.save()
-            return Response("data received??", status=status.HTTP_200_OK)
+            return Response({"detail": "Video attached"}, status=status.HTTP_201_CREATED)
         else:
-            print(request.data)
             video_id = request.data.get("video_id", None)
             if video_id is None:
                 raise ParseError("No id provided")
             try:
-                video_obj = Photos.objects.get(id=video_id)
+                video_obj = Videos.objects.get(id=video_id)
                 video_obj.delete()
             except Photos.DoesNotExist:
-                return Response(f"Photo with {video_id} does not exist", status=status.HTTP_400_BAD_REQUEST)
-            return Response("Video deleted", status=status.HTTP_204_NO_CONTENT)
+                return Response(f"Video with id {video_id} does not exist", status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Video deleted"}, status=status.HTTP_204_NO_CONTENT)
 
 class PhotosViewSet(RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
     permission_classes=[IsAuthenticated]
