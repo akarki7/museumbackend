@@ -1,5 +1,6 @@
 from django.urls import path
 from django.urls.conf import include
+from django.urls import re_path
 from django.conf.urls import url
 from sites import urls as museum_urls
 from users import urls as auth_urls
@@ -23,6 +24,7 @@ urlpatterns = [
     path("api/", include(museum_urls)),
     path("auth/", include(auth_urls)),
     url(r"^media/(?P<path>.*)$", authenticate_and_serve),
+    # re_path('media/<path:path>/',authenticate_and_serve)
 ]
 
 if os.getenv("LOCAL_DEVELOPMENT", None) is not None:

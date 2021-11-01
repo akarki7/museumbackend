@@ -47,7 +47,7 @@ class TestFrontendDataTransfer(TestCase):
         self.client.credentials(HTTP_AUTHORIZATION="Bearer "+token)
     
     def test_site_creation(self):
-        with open('./sites/test/media_files_for_test/test_preview.txt', 'rb') as preview_file:
+        with open('./sites/tests/media_files_for_test/test_preview.txt', 'rb') as preview_file:
             pre_request = APIRequestFactory()
             request_url = "api/sites/"
             view = SitesViewSet.as_view({"post": "create"})
@@ -107,7 +107,7 @@ class TestFrontendDataTransfer(TestCase):
 
     def test_photo_attachment_detachment(self):
 
-        with open("./sites/test/media_files_for_test/jasmine.jpeg", "rb") as jasmine:
+        with open("./sites/tests/media_files_for_test/jasmine.jpeg", "rb") as jasmine:
             response = self.client.post(f"/api/sites/{self.preexisting_site.serial_number}/photos/", data={"file": jasmine, "name":"jasmine"})
             self.assertEqual(201, response.status_code)
             self.assertEqual("Photo attached", response.data.get("detail"))
@@ -121,12 +121,12 @@ class TestFrontendDataTransfer(TestCase):
     
     def test_video_attachment_detachment(self):
 
-        with open("./sites/test/media_files_for_test/1_screaming_sheep.mp4", "rb") as sheep:
+        with open("./sites/tests/media_files_for_test/1_screaming_sheep.mp4", "rb") as sheep:
             response = self.client.post(f"/api/sites/{self.preexisting_site.serial_number}/videos/", data={"file": sheep, "name":"sheep1"})
             self.assertEqual(201, response.status_code)
             self.assertEqual("Video attached", response.data.get("detail"))
 
-        with open("./sites/test/media_files_for_test/2_screaming_sheeps.mp4", "rb") as sheep:
+        with open("./sites/tests/media_files_for_test/2_screaming_sheeps.mp4", "rb") as sheep:
             response = self.client.post(f"/api/sites/{self.preexisting_site.serial_number}/videos/", data={"file": sheep, "name":"sheep2"})
             self.assertEqual(201, response.status_code)
             self.assertEqual("Video attached", response.data.get("detail"))
