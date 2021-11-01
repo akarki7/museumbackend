@@ -1,4 +1,4 @@
-from djano_filters import rest_framework as filters
+from django_filters import rest_framework as filters
 from sites.models import Site, TimePeriod
 from rest_framework.permissions import IsAuthenticated
 
