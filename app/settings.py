@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     "fileServers",
     "sites",
     "users",
-    "corsheaders"
+    "corsheaders",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
