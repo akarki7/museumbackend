@@ -5,15 +5,15 @@ import os
 from django.conf import settings
 # Create your models here.
 
+class TimePeriod(models.TextChoices):
+    FL= "FL" ,"Flakkaserne and before"
+    G1= "G1", "Grohn Barracks I"
+    DP= "DP",  "DP Camp Grohn"
+    G2= "G2", "Grohn Barracks II"
+    RK= "RK", "Roland-Kaserne"
+    JU= "JU", "IUB-JU"
+
 class Site(models.Model):
-    time_period_choices = [
-        ("FL" ,"Flakkaserne and before"),
-        ("G1", "Grohn Barracks I"),
-        ("DP",  "DP Camp Grohn"),
-        ("G2", "Grohn Barracks II"),
-        ("RK", "Roland-Kaserne"),
-        ("JU", "IUB-JU")
-    ]
 
     serial_number = models.CharField(max_length=10, null=False, primary_key=True)
     title = models.CharField(max_length=50, null=False)
@@ -23,7 +23,7 @@ class Site(models.Model):
     file_type= models.CharField(max_length=5, null=False, blank=True)
     original_scan = models.CharField(max_length=5, null=False, blank=True)
     # whether it was orignal, scan or a copy 
-    time_period = models.CharField(max_length=2, choices=time_period_choices, default="JU")
+    time_period = models.CharField(max_length=2, choices=TimePeriod.choices, default="JU")
     origin_date = models.DateField(auto_now_add=False, null=False, blank=False, default=date(1970, 1, 1))
     author = models.CharField(max_length=40)
     size = models.IntegerField(null=True, blank=True)
