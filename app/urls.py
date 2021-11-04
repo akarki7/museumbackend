@@ -1,9 +1,10 @@
 from django.urls import path
 from django.urls.conf import include
+from django.urls import re_path
 from django.conf.urls import url
 from sites import urls as museum_urls
 from users import urls as auth_urls
-from fileServers.views import authenticate_and_serve
+from fileServers.views import AuthenticateAndServe
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularSwaggerView,
@@ -22,7 +23,7 @@ urlpatterns = [
     ),
     path("api/", include(museum_urls)),
     path("auth/", include(auth_urls)),
-    url(r"^media/(?P<path>.*)$", authenticate_and_serve),
+    url(r"^media/(?P<path>.*)$", AuthenticateAndServe.as_view()),
 ]
 
 if os.getenv("LOCAL_DEVELOPMENT", None) is not None:

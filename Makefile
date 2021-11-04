@@ -5,7 +5,7 @@ build:
 	docker-compose build
 
 test:
-	./bin/run.sh pytest .
+	./bin/run.sh pytest . -s
 
 run:
 	docker-compose up

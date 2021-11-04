@@ -15,6 +15,7 @@ from .serializers import PhotoSerializer, SiteSerializer, VideoSerializer
 from rest_framework.parsers import MultiPartParser
 from rest_framework.decorators import action
 from .models import Site, Photos, Videos
+from .filters import SiteFilter
 
 # Create your views here.'
 
@@ -29,6 +30,7 @@ class SitesViewSet(
     permission_classes = [IsAuthenticated]
     serializer_class = SiteSerializer
     queryset = Site.objects.all()
+    filterset_class = SiteFilter
 
     @action(methods=["POST", "DELETE"], parser_classes=[MultiPartParser], detail=True, url_path="photos")
     def handle_photos(self, request, pk):
