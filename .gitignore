@@ -8,3 +8,5 @@ assets/
 serverless.yml
 terraform/
 static/
+arnav_env.env
+yourdatabasename.db
