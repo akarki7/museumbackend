@@ -21,7 +21,7 @@ services:
         POSTGRES_PASSWORD: postgres
         POSTGRES_DB: postgres
     volumes:
-      - postgres:/var/lib/pgsql/data
+      - postgres:/var/lib/pgsql
     ports:
       - "5432:5432"
     restart: unless-stopped
