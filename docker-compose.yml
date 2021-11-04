@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 
 services:
   web:
@@ -21,7 +21,7 @@ services:
         POSTGRES_PASSWORD: postgres
         POSTGRES_DB: postgres
     volumes:
-      - postgres:/data/postgres
+      - postgres:/var/lib/pgsql
     ports:
       - "5432:5432"
     restart: unless-stopped

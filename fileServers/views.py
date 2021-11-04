@@ -2,12 +2,13 @@ from os import error
 from django.shortcuts import render
 from django.views.static import serve
 from django.conf import settings
-from django.http import HttpResponseBadRequest, HttpResponse
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
-def authenticate_and_serve(request, path):
-    if request.user.is_authenticated:
+class AuthenticateAndServe(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, path):
         return serve(request, path, settings.MEDIA_ROOT)
-    else:
-        return HttpResponseBadRequest("{\"detail\": \"Selected resource not found\"}", content_type="application/json")

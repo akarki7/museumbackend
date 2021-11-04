@@ -1,12 +1,88 @@
-.venv
-.vscode
-db.sqlite3
 __pycache__/
-assets/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+.installed.cfg
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Sphinx documentation
+docs/_build/
+
+__pypackages__/
+
+# Environments
 .env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+.vscode
+__pycache__
+
+# env
+.env
+<<<<<<< HEAD
 *.docx
 serverless.yml
 terraform/
 static/
 arnav_env.env
 yourdatabasename.db
+=======
+
+# pytest
+.pytest_cache/
+
+/fileServer
+>>>>>>> 89cb0ea9e9883e412bf1b494ff8c3f1ac1b26543
